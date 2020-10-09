@@ -6,9 +6,9 @@ on:
       - master
 
 env:
-  AZURE_WEBAPP_NAME: my-app-name    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  DOTNET_VERSION: '3.1.x'           # set this to the dot net version to use
+  AZURE_WEBAPP_NAME: newstory-admin
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
+  DOTNET_VERSION: '3.1.x'
 
 jobs:
   build:
@@ -18,18 +18,14 @@ jobs:
       # Checkout the repo
       - uses: actions/checkout@master
 
-      # Setup .NET Core SDK
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
-
-      # Run dotnet build and publish
-      - name: dotnet build and publish
-        run: |
-          dotnet restore
-          dotnet build --configuration Release
-          dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
+          node-version: ${{ matrix.node-version }}
+          - name: Install Packages
+            run: npm install
+          - name: Build page
+            run: npm run build
 
       # Deploy to Azure Web apps
       - name: 'Run Azure webapp deploy action using publish profile credentials'
