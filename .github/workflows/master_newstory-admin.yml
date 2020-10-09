@@ -32,4 +32,4 @@ jobs:
         app-name: 'newstory-admin'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_9b9cb2395d3140718f5ae032a9c66f2e }}
-        package: .
+        package: build
