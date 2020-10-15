@@ -27,7 +27,7 @@ export default function App() {
     <Container maxWidth="sm">
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Create React App v4-beta example with TypeScript
+          Create React App v4-beta example with TypeScript (Newstory)
         </Typography>
         {initialized && !keycloak?.authenticated && (
           <a className="btn-link" onClick={() => keycloak.login()}>
