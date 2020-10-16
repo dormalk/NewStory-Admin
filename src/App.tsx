@@ -30,12 +30,12 @@ export default function App() {
           Create React App v4-beta example with TypeScript (Newstory)
         </Typography>
         {initialized && !keycloak?.authenticated && (
-          <a className="btn-link" onClick={() => keycloak.login()}>
+          <a href="/#" className="btn-link" onClick={() => keycloak.login()}>
             Login
           </a>
         )}
         {keycloak?.authenticated && (
-          <a className="btn-link" onClick={() => keycloak.logout()}>
+          <a href="/#" className="btn-link" onClick={() => keycloak.logout()}>
             Logout ({(keycloak?.tokenParsed as any)?.preferred_username})
           </a>
         )}
