@@ -34,6 +34,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "prettier": "^2.1.2",
-    "typescript": "latest"
+    "typescript": "latest",
+    "react-router-dom": "^5.2.0"
   }
 }
