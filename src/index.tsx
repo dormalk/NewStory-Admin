@@ -5,14 +5,11 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import App from "./App";
 import theme from "./theme";
 import { ReactKeycloakProvider } from "@react-keycloak/web";
-import keycloak from "./keycloak";
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <ReactKeycloakProvider authClient={keycloak}>
       <CssBaseline />
       <App />
-    </ReactKeycloakProvider>
   </ThemeProvider>,
   document.querySelector("#root")
 );
