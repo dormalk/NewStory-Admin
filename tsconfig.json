@@ -6,6 +6,9 @@
       "dom",
       "dom.iterable"
     ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -18,9 +21,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
+    "baseUrl": ".",
     "noFallthroughCasesInSwitch": true
   },
   "include": [
     "src"
+  ],
+  "exclude": [ 
+    "node_modules"
   ]
 }

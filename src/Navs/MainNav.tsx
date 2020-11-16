@@ -1,5 +1,6 @@
+//@ts-nocheck
 import React from "react";
-import { BrowserRouter as Router, Route, Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function MainNav() {
     const location = useLocation();
