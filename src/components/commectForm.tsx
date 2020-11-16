@@ -61,7 +61,7 @@ export default function CommentForm(){
                 >
                     <React.Fragment>
                         {postToShow.text}
-                        <br/>
+                        <hr/>
                         <GradePicker onPick={(val:any) => {
                                 const updatedPost = {
                                     ...postToShow,
@@ -70,7 +70,7 @@ export default function CommentForm(){
                                 setPostToShow(updatedPost)
                             }}
                             pickedValue={postToShow.grade}/>
-                            <br/>
+                            <hr/>
                             <label htmlFor="review">
                                 סקירת אנליסט
                             </label>
