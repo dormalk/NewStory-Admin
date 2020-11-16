@@ -2,8 +2,7 @@ import { Container } from "@material-ui/core";
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import TableDemo from './TableDemo';
-import RightNav from './navs/rightNav';
-import MainNav from './navs/mainNav';
+import {RightNav,MainNav} from './navs';
 
 function Index(){
   return <h2>Home</h2>
