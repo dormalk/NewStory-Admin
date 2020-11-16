@@ -17,7 +17,7 @@ export default function RightNav() {
             ]
         },
         {
-            path: '/profiling',
+            path: '/comments',
             label: 'פרופיילינג',
         }
     ]

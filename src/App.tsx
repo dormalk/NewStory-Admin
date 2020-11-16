@@ -1,8 +1,8 @@
 import { Container } from "@material-ui/core";
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import TableDemo from './TableDemo';
 import {RightNav,MainNav} from './navs';
+import {CommentForm} from './components';
 
 function Index(){
   return <h2>Home</h2>
@@ -18,7 +18,7 @@ export default function App() {
           <MainNav/>
             <Container>
               <Route path="/" exact component={Index}/>
-              <Route path="/profiling" exact component={TableDemo}/>
+              <Route path="/comments" exact component={CommentForm}/>
             </Container>
         </div>
       </div>

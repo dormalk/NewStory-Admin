@@ -1,0 +1,22 @@
+.form{
+    animation-name: fadeIn;
+    animation-duration: 1s;
+}
+
+.form.hide{
+    position: relative;
+    animation-name: floatOut;
+    animation-duration: 1s;
+
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+
+
+@keyframes floatOut {
+    from {right: 0;opacity:1}
+    to {right: 400px;opacity:0}
+}
