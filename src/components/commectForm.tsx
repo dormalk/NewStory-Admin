@@ -12,7 +12,7 @@ interface ParsedComment {
     text: string,
     grade?: number,
     review?:string,
-    createdAt: Date
+    createdAt: String
 }
 
 export default function CommentForm(){
@@ -33,13 +33,19 @@ export default function CommentForm(){
         Papa.parse(csv, {
             complete: function(results:any) {
                 const randNum = Math.floor(Math.random() * Math.floor(results.data.length))
-                
+                const reandomDate = randomDate(new Date(2012, 0, 1), new Date());
+                const year = reandomDate.getFullYear();
+                const month = reandomDate.getMonth();
+                const day = reandomDate.getDate();
+        
+                const hrs = Math.floor(Math.random() * Math.floor(24))
+                const mins = Math.floor(Math.random() * Math.floor(60))
                 const comment : ParsedComment = {
                     username: results.data[randNum][0],
                     text: results.data[randNum][1],
                     varient: randNum%6+1,
                     review: '',
-                    createdAt: randomDate(new Date(2012, 0, 1), new Date())
+                    createdAt: `${day}/${month}/${year}  ${hrs}:${mins < 10 ? '0'+mins: mins}`
                 } 
                 setPostToShow(comment)
             }
@@ -68,15 +74,10 @@ export default function CommentForm(){
     }
 
     const buildHeader = () => {
-        const year = postToShow?.createdAt.getFullYear();
-        const month = postToShow?.createdAt.getMonth();
-        const day = postToShow?.createdAt.getDate();
 
-        const hrs = Math.floor(Math.random() * Math.floor(24))
-        const mins = Math.floor(Math.random() * Math.floor(60))
         return <div className="d-flex justify-content-between">
             <span>תגובה</span>
-            <span>{`${day}/${month}/${year}  ${hrs}:${mins < 10 ? '0'+mins: mins}`}</span>
+            <span>{postToShow?.createdAt}</span>
         </div>
     }
     return(
