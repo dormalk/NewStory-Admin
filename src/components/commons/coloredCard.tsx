@@ -8,7 +8,8 @@ interface ColoredCardPropd {
     img?: string,
     tags?: string[],
     children: any,
-    footer: any
+    footer: any,
+    header: any
 }
 
 
@@ -16,8 +17,10 @@ interface ColoredCardPropd {
 export default function ColoredCard(props: ColoredCardPropd){
     console.log(parseNumToVarient(props.varient))
     return(
-        <div className={`card border-${parseNumToVarient(props.varient)} col`}>
-            <div className={`card-header bg-transparent border-${parseNumToVarient(props.varient)}`}>דירוג תגובה</div>
+        <div className={`card border-${parseNumToVarient(props.varient)} col`} style={{maxWidth: '50rem'}}>
+            <div className={`card-header bg-transparent border-${parseNumToVarient(props.varient)}`}>
+            {props.header}
+            </div>
             <div className={`card-body text-${parseNumToVarient(props.varient)}`}>
                 <h5 className="card-title">{props.textHeader}</h5>
                 <p className="card-text">{props.children}</p>
