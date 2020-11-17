@@ -22,7 +22,10 @@ export default function CommentForm(){
     const [isHide, setisHide] = useState<boolean>(false);
 
     useEffect(() => {
-        if(!isLoad) setRandomPost();
+        if(!isLoad) {
+            setRandomPost();
+            isLoad = true;
+        }
     },[setPostToShow])
 
 
