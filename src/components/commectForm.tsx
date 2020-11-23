@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react';
 import Papa from 'papaparse';
 import {csv} from '../shared/PostFileOutput';
 import {Varient} from '../shared/varients';
-import {ColoredCard,GradePicker} from './commons';
+import {ColoredCard,GradePicker, MultiSelectPicker} from './commons';
 import '../css/commectForm.css';
 import { randomDate } from 'src/helpers/random';
 
@@ -15,11 +15,18 @@ interface ParsedComment {
     createdAt: String
 }
 
+const options = [
+    'סיבה 1',
+    'סיבה 2',
+    'סיבה 3'
+]
+
 export default function CommentForm(){
     
     var isLoad = false;
     const [postToShow,setPostToShow] = useState<ParsedComment>();
     const [isHide, setisHide] = useState<boolean>(false);
+    const [pickedOptions, setPickedOptions] = useState<string[]>([]);
 
     useEffect(() => {
         if(!isLoad) {
@@ -106,6 +113,15 @@ export default function CommentForm(){
                                 setPostToShow(updatedPost)
                             }}
                             pickedValue={postToShow.grade}/>
+                            <hr/>
+                            <label>
+                            סיבת דירוג אנליסט
+                            </label>
+
+                            <MultiSelectPicker  options={options.filter((op:any) => !pickedOptions.includes(op))}
+                                                pickedValues={pickedOptions}
+                                                onDrop={(value:string) => setPickedOptions(pickedOptions.filter(op => op != value))}
+                                                onPick={(value:string) => setPickedOptions([...pickedOptions,value])}/>
                             <hr/>
                             <label htmlFor="review">
                                 סקירת אנליסט

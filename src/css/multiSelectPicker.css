@@ -1,0 +1,20 @@
+.pickedOption{
+    padding: 0.5rem 1rem;
+    flex: 1;
+    background: WhiteSmoke;
+    margin: 1rem;
+    align-items: center;
+}
+
+.pickedOption span{
+    background-color: white;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    display: inline-block;
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
