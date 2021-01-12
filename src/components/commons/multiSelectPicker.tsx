@@ -19,7 +19,7 @@ export default (props:GradePickerProps) =>{
         );
     }
     const buildSelectOptions = () => {
-        return <select className="form-control" onChange={(event) => event.target.value != '' && props.onPick(event.target.value)}>
+        return <select className="form-control" onChange={(event) => event.target.value != '' && props.onPick(event.target.value)} defaultValue="">
         <option></option>
         {
             props.options?.map((option,index) => <option key={index} value={option}>{option}</option>)

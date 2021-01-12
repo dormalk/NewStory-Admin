@@ -1,0 +1,16 @@
+import Bagel from '@bageldb/bagel-db'
+let API_TOKEN = "eyJhbGciOiJSUzI1NiIsImtpZCI6ImFwaS1rZXkiLCJ0eXAiOiJKV1QifQ.eyJvcmdhbml6YXRpb25JRCI6ImJ2cGZxczIyM2FrZzAwOXR0NjBnIiwicHJvamVjdElEIjoiYnZ1NjBuaTIzYWtnMDBkZWJtaGciLCJhdWQiOiJodHRwczovL2FwcC5iYWdlbGRiLmNvbSIsImp0aSI6Ijc0NTk2MzYwLWFmYzMtNGYzMC05NTA1LTQzMDI0MjA0ZWViNSIsImlzcyI6Imh0dHBzOi8vYXV0aGVudGljYXRpb24uYmFnZWxkYi5jbyIsInN1YiI6ImJ2dTYwbmkyM2FrZzAwZGVibWhnIn0.Icjm5VeEL3avg1FN16kUGMApQJndzi2ogaNEyIM4q7E3nwJuEQsMIPa9FiNJb7pSQvZtbkKNntzFT438r07Ae_ZOtyQrS0hiwvzLz6szlx1O0xAxKQr-j8snjXgn36-yvxww55drNTVVvbtdxXbdIMVOpxEmv9U0gw86CtWnCez7jdkiZVCClBAnrzjeFr5NsV3o8K_b51uuNQ9GGfnp0t61IRLCCKW_6rEVAV_M8RjTd2ONhFfHjxsKmXCpn3Ru5armYiBcAne1R07WXSepSkW3HOHSPTgRkDL25esxLGIhyvZo2aG2x9VLO_GmbSL4ZS7Y6ttIh6JI_ibmoqZ8q6gUai93LVl34yxFMoYJNmfS9ezt9HzAngSt-DDYaeNxdLpSActw5YgbjfFnaFPEI0ZWdeRR6VfeibY86FjrlpRGZLT5wLphjyu3GeSF6YU7zShb6euLIb1ppJOnsVGRY38T3L32i7doOfIzqk5UJvcPTcJLzqeZkoLjITANdPFT8CUBTvldEUscbvqnLu4z1rQ_-WdMjXDRD5NWDUd2gqrJQMwlqtW0ozNlVbxU-B9n8YLmusFU0AM2Kl-hSwWPMzU1GGj1bUFRvVPzarcHurmC_hFHNbUlArdWnxxCJ1Q4-caoZG2yXbc1fuo4pcue9zqHUxIznZAG1Te4Yq3hdx8"
+let db = new Bagel(API_TOKEN)
+
+
+let intergration = {};
+const integrate = async(collection) => {
+    if(intergration[collection] == undefined){
+        const res = await db.collection(collection).get()
+        intergration[collection] = res.data.map((item) => item.value);
+    } 
+    return intergration[collection]
+}
+
+
+export {db,integrate}

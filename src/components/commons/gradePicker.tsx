@@ -7,7 +7,7 @@ interface GradePickerProps{
 }
 
 export default function GradePicker(props:GradePickerProps){
-    const values = [9,8,7,6,5,4,3,2,1,0];
+    const values = [10,9,8,7,6,5,4,3,2,1];
     const colors = ['#009933','#00cc00','#33cc33','#66ff33','#ccff33','#ffff00','#ffcc00','#ff9933','#ff3300','#990000']
     return(
         <React.Fragment>

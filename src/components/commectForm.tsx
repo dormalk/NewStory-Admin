@@ -5,7 +5,7 @@ import {Varient} from '../shared/varients';
 import {ColoredCard,GradePicker, MultiSelectPicker} from './commons';
 import '../css/commectForm.css';
 import { randomDate } from 'src/helpers/random';
-
+import {integrate} from 'src/shared/bagelDb';
 interface ParsedComment {
     username : string,
     varient: Varient,
@@ -15,16 +15,6 @@ interface ParsedComment {
     createdAt: String
 }
 
-const options = [
-    'תמונה עם צבעים קודרים',
-    'תוכן בנושא זנות',
-    'תוכן בנושא אובדנות',
-    'תוכן בנושא הפרעות אכילה',
-    'תוכן בנושא דימוי גוף',
-    'תוכן בנושא פגיעה עצמית',
-    'תוכן בנושא התמכרויות',
-    'מילה מעוררת חשד'
-]
 
 export default function CommentForm(){
     
@@ -32,15 +22,20 @@ export default function CommentForm(){
     const [postToShow,setPostToShow] = useState<ParsedComment>();
     const [isHide, setisHide] = useState<boolean>(false);
     const [pickedOptions, setPickedOptions] = useState<string[]>([]);
-
+    const [options, setOptions] = useState<string[]>([])
     useEffect(() => {
         if(!isLoad) {
             setRandomPost();
+            loadOptions();
             isLoad = true;
         }
     },[setPostToShow])
 
 
+    const loadOptions = async () =>{
+        const res = await integrate('requesttyps')
+        setOptions(res);
+    }
     const setRandomPost = () => {
         Papa.parse(csv, {
             complete: function(results:any) {
@@ -59,6 +54,7 @@ export default function CommentForm(){
                     review: '',
                     createdAt: `${day}/${month}/${year}  ${hrs}:${mins < 10 ? '0'+mins: mins}`
                 } 
+                setPickedOptions([])
                 setPostToShow(comment)
             }
         });
