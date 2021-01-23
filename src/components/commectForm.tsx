@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react';
 import Papa from 'papaparse';
 import {csv} from '../shared/PostFileOutput';
+import { getRandromPost } from '../shared/postsServerRequests';
 import {Varient} from '../shared/varients';
 import {ColoredCard,GradePicker, MultiSelectPicker} from './commons';
 import '../css/commectForm.css';
@@ -27,14 +28,19 @@ export default function CommentForm(){
         if(!isLoad) {
             setRandomPost();
             loadOptions();
+            loadPost();
             isLoad = true;
         }
     },[setPostToShow])
 
 
     const loadOptions = async () =>{
-        const res = await integrate('requesttyps')
+        const res = await integrate('reasons')
         setOptions(res);
+    }
+
+    const loadPost = async() =>{
+        const res = await getRandromPost(1);
     }
     const setRandomPost = () => {
         Papa.parse(csv, {
