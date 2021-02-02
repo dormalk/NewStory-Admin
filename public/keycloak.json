@@ -1,0 +1,8 @@
+{
+    "realm": "newstory",
+    "auth-server-url": "http://keycloak.newstory.gq/auth/",
+    "ssl-required": "external",
+    "resource": "newstory-react-dev",
+    "public-client": true,
+    "confidential-port": 0
+ }

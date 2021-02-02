@@ -5,16 +5,18 @@
   "dependencies": {
     "@bageldb/bagel-db": "^0.2.21",
     "@material-ui/core": "latest",
-    "@react-keycloak/web": "^3.0.0",
+    "@react-keycloak/web": "^3.4.0",
     "@types/node": "^14.11.8",
     "@types/papaparse": "^5.2.4",
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/react-router": "^5.1.8",
     "@types/react-router-dom": "^5.1.6",
-    "keycloak-js": "^11.0.2",
+    "axios": "^0.21.1",
+    "keycloak-js": "^11.0.3",
     "papaparse": "^5.3.0",
     "prettier": "^2.1.2",
+    "query-string": "^6.13.8",
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "^5.2.0",
@@ -23,6 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
