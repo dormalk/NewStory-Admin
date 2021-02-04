@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useCallback } from 'react'
-import { Redirect, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 import { useKeycloak } from '@react-keycloak/web'
 
@@ -16,8 +16,10 @@ const LoginPage = () => {
     keycloak?.login()
   }, [keycloak])
 
+  
+
   if (keycloak?.authenticated)
-    return <Redirect to={currentLocationState?.from as string} />
+    console.log("authenticated!")
 
   return (
     <div>

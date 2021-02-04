@@ -27,7 +27,7 @@ export default function App() {
     console.log(code)
   },[initialized,keycloak])
   return (
-    !initialized? 
+    initialized? 
     <Router>
       <div className="wrapper">
         <RightNav/>
