@@ -11,6 +11,7 @@
     font-weight: bolder;
     opacity: 0.2;
     transform: scale(1.2);
+    line-height: 25px;
 }
 
 .circle.active{

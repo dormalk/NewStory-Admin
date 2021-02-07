@@ -1,12 +1,13 @@
 import React,{useEffect, useState} from 'react';
 import Papa from 'papaparse';
 import {csv} from '../shared/PostFileOutput';
-import { getRandromPost } from '../shared/postsServerRequests';
 import {Varient} from '../shared/varients';
 import {ColoredCard,GradePicker, MultiSelectPicker} from './commons';
 import '../css/commectForm.css';
 import { randomDate } from 'src/helpers/random';
 import {integrate} from 'src/shared/bagelDb';
+import { useKeycloak } from '@react-keycloak/web';
+import {getRandomPost} from 'src/shared/requests_api';
 interface ParsedComment {
     username : string,
     varient: Varient,
@@ -18,52 +19,49 @@ interface ParsedComment {
 
 
 export default function CommentForm(){
+  const {keycloak,initialized} = useKeycloak();
     
+
+
     var isLoad = false;
     const [postToShow,setPostToShow] = useState<ParsedComment>();
     const [isHide, setisHide] = useState<boolean>(false);
     const [pickedOptions, setPickedOptions] = useState<string[]>([]);
     const [options, setOptions] = useState<string[]>([])
+
     useEffect(() => {
         if(!isLoad) {
             setRandomPost();
             loadOptions();
-            loadPost();
             isLoad = true;
         }
     },[setPostToShow])
-
 
     const loadOptions = async () =>{
         const res = await integrate('reasons')
         setOptions(res);
     }
+    const setRandomPost = async() => {
+        const data = await getRandomPost(keycloak.token);
 
-    const loadPost = async() =>{
-        const res = await getRandromPost(1);
-    }
-    const setRandomPost = () => {
-        Papa.parse(csv, {
-            complete: function(results:any) {
-                const randNum = Math.floor(Math.random() * Math.floor(results.data.length))
-                const reandomDate = randomDate(new Date(2012, 0, 1), new Date());
-                const year = reandomDate.getFullYear();
-                const month = reandomDate.getMonth();
-                const day = reandomDate.getDate();
-        
-                const hrs = Math.floor(Math.random() * Math.floor(24))
-                const mins = Math.floor(Math.random() * Math.floor(60))
-                const comment : ParsedComment = {
-                    username: results.data[randNum][0],
-                    text: results.data[randNum][1],
-                    varient: randNum%6+1,
-                    review: '',
-                    createdAt: `${day}/${month}/${year}  ${hrs}:${mins < 10 ? '0'+mins: mins}`
-                } 
-                setPickedOptions([])
-                setPostToShow(comment)
-            }
-        });
+        const reandomDate = new Date(data.created_date[0]);
+        const year = reandomDate.getFullYear();
+        const month = reandomDate.getMonth();
+        const day = reandomDate.getDate();
+
+        const hrs = Math.floor(Math.random() * Math.floor(24))
+        const mins = Math.floor(Math.random() * Math.floor(60))
+        console.log(data)
+        const randNum = Math.floor(Math.random() * 7)
+        const comment:ParsedComment  = {
+            username: data.username,
+            text: data.caption, //need to change,
+            varient: randNum,
+            createdAt: `${day}/${month}/${year}  ${hrs}:${mins < 10 ? '0'+mins: mins}`
+
+        }
+        setPickedOptions([])
+        setPostToShow(comment)
     }
     const buildFooter = () =>{
         return  <div className="row"  style={{display: 'flex', justifyContent: 'flex-end'}}>

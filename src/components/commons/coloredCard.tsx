@@ -23,7 +23,7 @@ export default function ColoredCard(props: ColoredCardPropd){
             </div>
             <div className={`card-body text-${parseNumToVarient(props.varient)}`}>
                 <h5 className="card-title">{props.textHeader}</h5>
-                <p className="card-text">{props.children}</p>
+                <div className="card-text">{props.children}</div>
             </div>
             <div className={`card-footer bg-transparent border-${parseNumToVarient(props.varient)}`}>
                 {props.footer}
