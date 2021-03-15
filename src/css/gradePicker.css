@@ -9,11 +9,12 @@
     font-size: 12px;
     color: white;
     font-weight: bolder;
-    opacity: 0.2;
+    opacity: 1;
+    border: 0px;
     transform: scale(1.2);
     line-height: 25px;
 }
 
 .circle.active{
-    opacity: 1
+    box-shadow: 0px 0px 5px red;
 }
