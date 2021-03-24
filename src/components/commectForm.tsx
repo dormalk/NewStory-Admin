@@ -104,6 +104,7 @@ export default function CommentForm() {
         <div className={`form ${isHide ? 'hide' : ''} d-flex justify-content-center`}>
             {
                 postToShow &&
+                
                 <ColoredCard
                     varient={postToShow?.varient}
                     type='Comment'
@@ -114,6 +115,37 @@ export default function CommentForm() {
                     <React.Fragment>
                         {postToShow.text}
                         <hr />
+                        <label htmlFor="freetext">
+                            ציטוטים וצירופי מילים
+                        </label>
+                        <textarea id="freetext"
+                            name="freetext"
+                            className="form-control"
+                            value={postToShow.freeText}
+                            onChange={onFreeTextChange}
+                            style={{ fontSize: '12px' }} />
+           <hr />
+                        <label>
+                            סיבת דירוג אנליסט
+                            </label>
+
+                        <MultiSelectPicker options={options.filter((op: any) => !pickedOptions.includes(op))}
+                            pickedValues={pickedOptions}
+                            onDrop={(value: string) => setPickedOptions(pickedOptions.filter(op => op != value))}
+                            onPick={(value: string) => setPickedOptions([...pickedOptions, value])} />
+                        <hr />
+                        <label htmlFor="review">
+                            הערות אנליסט
+                            </label>
+                        <textarea id="review"
+                            name="review"
+                            className="form-control"
+                            value={postToShow.review}
+                            onChange={onReviewTextareaChange}
+                            style={{ fontSize: '12px' }} />
+
+
+                            <hr/>
                         <label>
                             סיכון לפגיעה כללית
                         </label>
@@ -139,37 +171,7 @@ export default function CommentForm() {
                                 }
                                 setPostToShow(updatedPost)
                             }}
-                            pickedValue={postToShow.sexual_hurt} />
-                        <hr />
-                        <label>
-                            סיבת דירוג אנליסט
-                            </label>
-
-                        <MultiSelectPicker options={options.filter((op: any) => !pickedOptions.includes(op))}
-                            pickedValues={pickedOptions}
-                            onDrop={(value: string) => setPickedOptions(pickedOptions.filter(op => op != value))}
-                            onPick={(value: string) => setPickedOptions([...pickedOptions, value])} />
-                        <hr />
-                        <label htmlFor="review">
-                            סקירת אנליסט
-                            </label>
-                        <textarea id="review"
-                            name="review"
-                            className="form-control"
-                            value={postToShow.review}
-                            onChange={onReviewTextareaChange}
-                            style={{ fontSize: '12px' }} />
-
-                        <hr />
-                        <label htmlFor="freetext">
-                            טקסט חופשי
-                            </label>
-                        <textarea id="freetext"
-                            name="freetext"
-                            className="form-control"
-                            value={postToShow.freeText}
-                            onChange={onFreeTextChange}
-                            style={{ fontSize: '12px' }} />
+                            pickedValue={postToShow.sexual_hurt} />        
 
                     </React.Fragment>
                 </ColoredCard>
