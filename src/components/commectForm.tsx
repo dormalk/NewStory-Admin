@@ -10,11 +10,13 @@ interface ParsedComment {
     varient: Varient,
     text: string,
     sexual_hurt?: number,
-    grade?: number,
+    score?: number,
     review?: string,
-    freeText?: string,
+    notes?: string,
     createdAt: String,
-    id: number[]
+    id: number[],
+    author:String,
+    authorId:String
 }
 
 
@@ -42,26 +44,32 @@ export default function CommentForm() {
         setOptions(res);
     }
     const setRandomPost = async () => {
-        const data = await getRandomPost(keycloak.token);
-
-        const reandomDate = new Date(data.created_date[0]);
-        const year = reandomDate.getFullYear();
-        const month = reandomDate.getMonth();
-        const day = reandomDate.getDate();
-        const hrs = Math.floor(Math.random() * Math.floor(24))
-        const mins = Math.floor(Math.random() * Math.floor(60))
-        const randNum = Math.floor(Math.random() * 7)
-        const comment: ParsedComment = {
-            username: data.username,
-            text: data.caption, //need to change,
-            varient: randNum,
-            createdAt: `${day}/${month}/${year}  ${hrs}:${mins < 10 ? '0' + mins : mins}`,
-            id: data.id,
-            grade: undefined,
-            review: ''
+        try{
+            const data = await getRandomPost(keycloak.token);
+            const reandomDate = new Date(data.created_date[0]);
+            const year = reandomDate.getFullYear();
+            const month = reandomDate.getMonth();
+            const day = reandomDate.getDate();
+            const hrs = Math.floor(Math.random() * Math.floor(24))
+            const mins = Math.floor(Math.random() * Math.floor(60))
+            const randNum = Math.floor(Math.random() * 7)
+            const data2 : any = await keycloak.loadUserInfo();
+            const comment: ParsedComment = {
+                username: data.username,
+                text: data.caption, //need to change,
+                varient: randNum,
+                createdAt: `${day}/${month}/${year}  ${hrs}:${mins < 10 ? '0' + mins : mins}`,
+                id: data.id,
+                score: undefined,
+                review: '',
+                author: data2.preferred_username,
+                authorId: data2.sub
+            }
+            setPickedOptions([])
+            setPostToShow(comment)
+        }catch(e){
+            console.error(e)
         }
-        setPickedOptions([])
-        setPostToShow(comment)
     }
     const buildFooter = () => {
         return <div className="row" style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -89,7 +97,7 @@ export default function CommentForm() {
         const text = event.currentTarget.value;
         const updatedPost: any = {
             ...postToShow,
-            freeText: text
+            notes: text
         }
         setPostToShow(updatedPost)
     }
@@ -121,7 +129,7 @@ export default function CommentForm() {
                         <textarea id="freetext"
                             name="freetext"
                             className="form-control"
-                            value={postToShow.freeText}
+                            value={postToShow.notes}
                             onChange={onFreeTextChange}
                             style={{ fontSize: '12px' }} />
            <hr />
@@ -153,11 +161,11 @@ export default function CommentForm() {
                             onPick={(val: any) => {
                                 const updatedPost = {
                                     ...postToShow,
-                                    grade: val
+                                    score: val
                                 }
                                 setPostToShow(updatedPost)
                             }}
-                            pickedValue={postToShow.grade} />
+                            pickedValue={postToShow.score} />
                         <hr />
                         <label>
                             סיכון לפגיעה מינית
