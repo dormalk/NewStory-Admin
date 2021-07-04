@@ -4,7 +4,7 @@ const refresh_token = async (code) => {
     const headers = {
         'grant_type': 'authorization_code',
         'code': code,
-        'enable-cors': 'true',
+        'enable-cors': 'false',
         'client_id': 'newstory-react-dev',
     }
     console.log(headers)

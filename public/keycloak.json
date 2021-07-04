@@ -5,5 +5,5 @@
     "resource": "newstory-react-dev",
     "public-client": true,
     "confidential-port": 0,
-    "enable-cors" : true
+    "enable-cors" : false
  }
