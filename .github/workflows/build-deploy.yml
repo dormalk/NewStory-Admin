@@ -2,9 +2,6 @@
 name: Build & deploy
 
 on:
-  # push:
-  #   branches:
-  #     - "*"
   pull_request:
     branches:
       - "*"
@@ -27,6 +24,8 @@ jobs:
       run: npm ci
     
     - name: Build project
+      env:
+        PUBLIC_URL: "/${{github.ref}}"
       run: npm run build
     
     - name: Upload production-ready build files
@@ -36,7 +35,7 @@ jobs:
         path: ./build
   
   deploy:
-    name: Deploy
+    name: Deploy PR
     needs: build
     runs-on: ubuntu-latest
     # if: github.ref == 'refs/heads/main'
