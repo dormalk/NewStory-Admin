@@ -25,7 +25,7 @@ jobs:
     
     - name: Build project
       env:
-        PUBLIC_URL: "/${{github.ref}}"
+        PUBLIC_URL: "/newstory-admin/${{github.ref}}"
       run: npm run build
     
     - name: Upload production-ready build files
