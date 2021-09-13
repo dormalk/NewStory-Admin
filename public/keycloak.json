@@ -2,7 +2,7 @@
     "realm": "newstory",
     "auth-server-url": "https://keycloak.newstory.gq/auth/",
     "ssl-required": "external",
-    "resource": "newstory-react-dev",
+    "resource": "newstory-react",
     "public-client": true,
     "confidential-port": 0,
     "enable-cors" : false
